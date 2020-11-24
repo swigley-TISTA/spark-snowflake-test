@@ -49,15 +49,6 @@ object main {
     val snowFlakeTableInput = "ITEM"
     val snowFlakeTableOutput = "BRANDS_COUNTS_G"
 
-    lazy val spark: SparkSession = {
-      SparkSession
-        .builder()
-        .master("local")
-        .appName(appName)
-        .getOrCreate()
-    }
-    import spark.implicits._
-
     val sfOptionsInput = Map(
       "sfURL" -> snowFlakeAccount,
       "sfUser" -> snowFlakeUser,
@@ -75,6 +66,15 @@ object main {
       "sfSchema" -> showFlakeSchemaOutput,
       "sfWarehouse" -> snowFlakeWh
     )
+
+    lazy val spark: SparkSession = {
+      SparkSession
+        .builder()
+        .master("local")
+        .appName(appName)
+        .getOrCreate()
+    }
+    import spark.implicits._
 
     // Read input table
     val testDS: Dataset[Item] = spark
