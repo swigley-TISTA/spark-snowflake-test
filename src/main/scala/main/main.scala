@@ -1,10 +1,7 @@
 package main
 
-import org.apache.spark.sql.{DataFrame, Dataset, Row, SaveMode, SparkSession}
-import org.apache.spark.sql.functions._
-import org.apache.spark.sql.types.{StringType, StructField, StructType}
+import org.apache.spark.sql.{Dataset, SaveMode, SparkSession}
 import net.snowflake.spark.snowflake.Utils.SNOWFLAKE_SOURCE_NAME
-import org.apache.spark
 
 case class Item(
                  I_ITEM_SK: BigDecimal,
@@ -60,7 +57,7 @@ object main {
     }
     import spark.implicits._
 
-    var sfOptionsInput = Map(
+    val sfOptionsInput = Map(
       "sfURL" -> snowFlakeAccount,
       "sfUser" -> snowFlakeUser,
       "sfPassword" -> snowFlakePw,
@@ -69,7 +66,7 @@ object main {
       "sfWarehouse" -> snowFlakeWh
     )
 
-    var sfOptionsOutput = Map(
+    val sfOptionsOutput = Map(
       "sfURL" -> snowFlakeAccount,
       "sfUser" -> snowFlakeUser,
       "sfPassword" -> snowFlakePw,
