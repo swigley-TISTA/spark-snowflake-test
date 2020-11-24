@@ -33,11 +33,12 @@ object main {
     val appName = "spark snowflake test"
     val snowFlakeSource = SNOWFLAKE_SOURCE_NAME
 
+    // Get account environment variables
     val snowFlakeAccountId = System.getenv("SNOWFLAKE_ACCT")
     val snowFlakeRegion = System.getenv("SNOWFLAKE_REGION")
     val snowFlakeUser = System.getenv("SNOWFLAKE_USER")
     val snowFlakePw = System.getenv("SNOWFLAKE_PW")
-    println(s"Using: $snowFlakeAccountId $snowFlakeRegion $snowFlakeUser $snowFlakePw")
+
     val snowFlakeAccount = s"$snowFlakeAccountId.$snowFlakeRegion.snowflakecomputing.com"
 
     val snowFlakeWh = "COMPUTE_WH"
