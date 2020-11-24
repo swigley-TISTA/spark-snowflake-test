@@ -1,6 +1,6 @@
 package main
 
-import org.apache.spark.sql.{Dataset, SaveMode, SparkSession}
+import org.apache.spark.sql.{DataFrame, Dataset, SaveMode, SparkSession}
 import net.snowflake.spark.snowflake.Utils.SNOWFLAKE_SOURCE_NAME
 
 case class Item(
@@ -88,8 +88,8 @@ object main {
     val count: Long = testDS.count()
     println("Count is: " + count + ".")
 
-    val brandsDF = testDS.groupBy("I_brand").count().sort()
-    val brands = brandsDF.map(row => (row.getString(0),row.getLong(1)))
+    val brandsDF: DataFrame = testDS.groupBy("I_brand").count().sort()
+    val brands: Dataset[(String, Long)] = brandsDF.map(row => (row.getString(0),row.getLong(1)))
     brands.foreach(row => println(row.toString))
 
     // Write output table
